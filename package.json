@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "core-js": "^3.0.1",
+    "radium": "^0.25.1",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.8.6",
@@ -23,8 +24,7 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all",
-      "not ie <= 11"
+      "not op_mini all"
     ],
     "development": [
       "last 1 chrome version",
