@@ -1,18 +1,52 @@
-import React,{Component} from 'react';
+import React,{PureComponent} from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
 
-class App extends Component {
-  state = {
-    persons: [
-      { id: "asdf", name: "Max", age: 26 },
-      { id: "zxcv", name: "Dev", age: 25 },
-      { id: "qwer", name: "Stephanie", age: 22 }
-    ],
-    otherProperty: null
-  };
-
+class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] Inside Constructor", props);
+    this.state = {
+      persons: [
+        { id: "asdf", name: "Max", age: 26 },
+        { id: "zxcv", name: "Dev", age: 25 },
+        { id: "qwer", name: "Stephanie", age: 22 }
+      ],
+      otherProperty: null,
+      showPersons:false
+    };
+  }
+  componentWillMount(){
+    console.log(" inside App.js componentWillMount");
+  }
+  componentDidMount(){
+    console.log(' Inside App.js componentDidMount');
+  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(
+  //     "[Update App.js] Inside shouldComponentUpdate()",
+  //     nextProps,
+  //     nextState
+  //   );
+  //   return nextState.persons !== this.state.persons ||
+  //   nextState.showPersons !== this.state.showPersons
+  //   //return true;
+  // }
+  componentWillUpdate(nextProps, nextState) {
+    console.log(
+      "[Update App.js] Inside componentWillUpdate()",
+      nextProps,
+      nextState
+    );
+  }
+  componentDidUpdate(nextProps, nextState) {
+    console.log(
+      "[Update App.js] Inside componentDidUpdate()",
+      nextProps,
+      nextState
+    );
+  }
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -38,28 +72,33 @@ class App extends Component {
   };
 
   render() {
+    console.log('Inside App.js Render()');
     let persons = <div />;
-   
 
     if (this.state.showPersons) {
-      persons = <Persons
-            persons={this.state.persons}
-            clicked={this.deletePersonhandler}
-            changed={this.nameChangeHandler}/>
+      persons = (
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonhandler}
+          changed={this.nameChangeHandler}
+        />
+      );
     }
-
-    
 
     return (
       <div className={classes.App}>
-       <Cockpit 
-         showPersons={this.state.showPersons}
-         persons={this.state.persons}
-         clicked={this.togglePersonsHandler}/>
+        <button onClick={()=>{this.setState({showPersons:true})}}>Show Persons</button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}
+        />
         {persons}
       </div>
     );
   }
+
+  
 }
 
 export default App;
