@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "core-js": "^3.0.1",
+    "prop-types": "^15.7.2",
     "radium": "^0.25.1",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.1",
@@ -33,6 +34,4 @@
       "last 1 safari version"
     ]
   }
-    
-  
 }

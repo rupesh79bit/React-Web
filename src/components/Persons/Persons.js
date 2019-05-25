@@ -5,6 +5,7 @@ class Persons extends PureComponent {
   constructor(props) {
     super(props);
     console.log("[Persons.js] Inside Constructor", props);
+    this.lastPersonRef=React.createRef();
   }
   componentWillMount() {
     console.log(" inside Persons.js componentWillMount");
@@ -40,6 +41,12 @@ class Persons extends PureComponent {
       nextState
     );
   }
+
+  componentDidMount() {
+    console.log("Inside Persons.js componentDidMount");
+    this.lastPersonRef.current.focus();
+  }
+
   render() {
     console.log("Inside Persons.js Render()");
     return this.props.persons.map((person, index) => {
@@ -47,16 +54,16 @@ class Persons extends PureComponent {
         <Person
           click={() => this.props.clicked(index)}
           name={person.name}
+          position={index}
           age={person.age}
-          key={person.id}
+          key={person.id} 
+          ref={this.lastPersonRef}
           changed={event => this.props.changed(event, person.id)}
         />
       );
     });
   }
-  componentDidMount() {
-    console.log("Inside Persons.js componentDidMount");
-  }
+  
 }
 
 
